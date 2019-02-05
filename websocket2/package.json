@@ -1,0 +1,13 @@
+{
+  "name": "websocket",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.16.4",
+    "redis": "^2.8.0",
+    "socket.io": "^2.1.1",
+    "socket.io-redis": "^5.2.0"
+  },
+  "scripts": {
+    "start": "node websocket.js"
+  }
+}
