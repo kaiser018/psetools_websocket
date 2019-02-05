@@ -1,0 +1,57 @@
+version: '3'
+services:
+  nginx:
+    build: ./nginx
+    links:
+      - websocket-001
+      - websocket-002
+      - websocket-003
+      - websocket-004
+    ports:
+     - "80:80"
+
+  websocket-001:
+    build: ./websocket
+    restart: always
+    links:
+      - psetools_redis
+    expose:
+      - '3000'
+    environment:
+      - NAME=001
+      
+  websocket-002:
+    build: ./websocket
+    restart: always
+    links:
+      - psetools_redis
+    expose:
+      - '3000'
+    environment:
+      - NAME=002
+
+  websocket-003:
+    build: ./websocket
+    restart: always
+    links:
+      - psetools_redis
+    expose:
+      - '3000'
+    environment:
+      - NAME=003
+
+  websocket-004:
+    build: ./websocket
+    restart: always
+    links:
+      - psetools_redis
+    expose:
+      - '3000'
+    environment:
+      - NAME=004
+
+  psetools_redis:
+    image: redis
+    restart: always
+    expose:
+      - '6379'
