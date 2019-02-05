@@ -51,7 +51,7 @@ services:
       - NAME=004
 
   psetools_redis:
-    image: redis
+    image: redis:alpine
     restart: always
     expose:
       - '6379'
