@@ -8,7 +8,7 @@ services:
       - websocket-003
       - websocket-004
     ports:
-     - "80:80"
+     - "3000:80"
 
   websocket-001:
     build: ./websocket
@@ -53,5 +53,6 @@ services:
   psetools_redis:
     image: redis:alpine
     restart: always
-    expose:
-      - '6379'
+    command: redis-server --requirepass psetools
+    ports:
+      - '6379:6379'

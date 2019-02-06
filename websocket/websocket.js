@@ -8,7 +8,7 @@ var serverName = process.env.NAME || 'Unknown';
 var instance =  parseInt(process.env.NODE_APP_INSTANCE || 0);
 
 
-io.adapter(redis({ host: 'psetools_redis', port: 6379 }));
+io.adapter(redis({ host: 'psetools_redis', port: 6379, password: 'psetools' }));
 
 server.listen(port, function() {
   console.log('Server listening at port %d', port);
@@ -192,3 +192,15 @@ io.on('connection', function(socket) {
 	});
 
 });
+
+app.all('/decrypt', function(req, res) {
+	res.json(decrypt(req.query.data));
+});
+
+var CryptoJS = require('crypto-js');
+
+function decrypt(encryptedData) {
+	var bytes = CryptoJS.AES.decrypt(encryptedData.toString(), 'T3chnist0ck');
+	var decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+	return JSON.parse(decryptedData);
+}
